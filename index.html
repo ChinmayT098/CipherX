@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hill Cipher Encryption & Decryption | Page 1: Input & Configuration</title>
+  <meta name="description" content="College Cryptography and Network Security mini project: 2x2 Hill Cipher encryption and decryption with manual key matrix configuration and real-time invertibility validation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header Navbar -->
+    <header class="navbar">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="project-title">Secure Text Encryption & Decryption using 2×2 Hill Cipher</h1>
+          <p class="project-subtitle">Cryptography & Network Security (CNS) Mini Project</p>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- Page Flow Indicator -->
+    <nav class="page-indicator-bar" aria-label="Project workflow">
+      <div class="indicator-step active">
+        <span class="step-num">1</span>
+        <span class="step-label">Page 1: Input & Configuration</span>
+      </div>
+      <div class="indicator-divider">&rarr;</div>
+      <div class="indicator-step">
+        <span class="step-num">2</span>
+        <span class="step-label">Page 2: Calculation Breakdown & Result</span>
+      </div>
+    </nav>
+
+    <!-- Alert Box for Validation Errors -->
+    <div id="alert-box" class="alert-box alert-danger hidden" role="alert"></div>
+
+    <!-- Main Two-Column Input Grid -->
+    <main class="dashboard-grid">
+      <!-- Left Column: Operation Selection & Text Input -->
+      <section class="card">
+        <div class="card-header">
+          <h2>
+            <span class="header-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </span>
+            1. Operation & Text Input
+          </h2>
+          <span class="badge badge-info">Modulo 26</span>
+        </div>
+
+        <!-- Operation Selection: Encrypt or Decrypt -->
+        <div class="form-group">
+          <label class="section-sublabel">Select Operation:</label>
+          <div class="operation-selector-group">
+            <label class="operation-option selected" id="label-op-encrypt">
+              <input type="radio" name="operation" id="op-encrypt" value="encrypt" checked>
+              <div class="op-card-content">
+                <span class="op-title">🔒 Encrypt</span>
+                <span class="op-desc">Plaintext &rarr; Ciphertext</span>
+              </div>
+            </label>
+            <label class="operation-option" id="label-op-decrypt">
+              <input type="radio" name="operation" id="op-decrypt" value="decrypt">
+              <div class="op-card-content">
+                <span class="op-title">🔓 Decrypt</span>
+                <span class="op-desc">Ciphertext &rarr; Plaintext</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Input Textarea -->
+        <div class="form-group margin-top-md">
+          <label for="input-text" id="input-text-label">Plaintext Input (Text to Encrypt):</label>
+          <textarea id="input-text" rows="4" placeholder="Enter plaintext to encrypt (e.g., ACT, HELLO, CNS)..."></textarea>
+          <p class="hint-text" id="input-hint-text">
+            <strong>Note:</strong> Non-alphabetic characters will be stripped. Letters map to numbers (A=0, B=1, &hellip;, Z=25). Odd-length plaintext will be padded with 'X'.
+          </p>
+        </div>
+      </section>
+
+      <!-- Right Column: Manual 2x2 Key Matrix Configuration -->
+      <section class="card">
+        <div class="card-header">
+          <h2>
+            <span class="header-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="12" y1="3" x2="12" y2="21"/>
+              </svg>
+            </span>
+            2. Manual 2×2 Key Matrix (K)
+          </h2>
+          <div id="key-status-badge" class="badge status-valid">
+            <span class="dot green"></span> Valid Key Matrix
+          </div>
+        </div>
+
+        <p class="matrix-instruction">
+          Manually enter four integer values (0 to 25) for matrix <code>K = [[k₁₁, k₁₂], [k₂₁, k₂₂]]</code>:
+        </p>
+
+        <!-- 2x2 Matrix Input Grid -->
+        <div class="matrix-grid-container">
+          <div class="matrix-bracket-input">
+            <div class="matrix-row">
+              <div class="matrix-input-cell">
+                <label for="k11" class="cell-label">k₁₁ (Row 1, Col 1)</label>
+                <input type="number" id="k11" value="7" min="0" max="25" class="matrix-cell">
+              </div>
+              <div class="matrix-input-cell">
+                <label for="k12" class="cell-label">k₁₂ (Row 1, Col 2)</label>
+                <input type="number" id="k12" value="8" min="0" max="25" class="matrix-cell">
+              </div>
+            </div>
+            <div class="matrix-row">
+              <div class="matrix-input-cell">
+                <label for="k21" class="cell-label">k₂₁ (Row 2, Col 1)</label>
+                <input type="number" id="k21" value="11" min="0" max="25" class="matrix-cell">
+              </div>
+              <div class="matrix-input-cell">
+                <label for="k22" class="cell-label">k₂₂ (Row 2, Col 2)</label>
+                <input type="number" id="k22" value="11" min="0" max="25" class="matrix-cell">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Diagnostics & Matrix Analysis Box -->
+        <div class="diagnostics-box">
+          <div class="box-title">Live Key Matrix Diagnostics</div>
+          <div id="key-details" class="key-details-content">
+            <!-- Rendered dynamically by app.js -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Proceed & Navigation Action Bar -->
+    <div class="card action-card">
+      <div class="action-card-inner">
+        <div class="action-description">
+          <strong>Ready to compute?</strong> Ensure your input text and 2×2 key matrix are filled. Click proceed to navigate to the detailed step-by-step mathematical calculation page.
+        </div>
+        <div class="action-buttons-group">
+          <button id="btn-reset" class="btn btn-outline" type="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"/>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+            </svg>
+            <span>Reset Inputs</span>
+          </button>
+          <button id="btn-proceed" class="btn btn-primary btn-proceed" type="button">
+            <span>Proceed to Calculation</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>CNS Mini Project &mdash; <strong>Secure Text Encryption & Decryption using 2×2 Hill Cipher</strong></p>
+      <p class="footer-meta">Designed for College Viva Demonstration &bull; Modulo 26 Matrix Arithmetic</p>
+    </footer>
+  </div>
+
+  <script type="module" src="./src/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hill Cipher Calculation Breakdown & Results | Page 2</title>
+  <meta name="description" content="Step-by-step mathematical calculation breakdown and result for 2x2 Hill Cipher encryption and decryption.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header Navbar -->
+    <header class="navbar">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="project-title">Secure Text Encryption & Decryption using 2×2 Hill Cipher</h1>
+          <p class="project-subtitle">Cryptography & Network Security (CNS) Mini Project</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Flow Indicator & Top Navigation Bar -->
+    <div class="results-top-nav">
+      <nav class="page-indicator-bar" aria-label="Project workflow">
+        <div class="indicator-step">
+          <span class="step-num">1</span>
+          <span class="step-label">Page 1: Input & Configuration</span>
+        </div>
+        <div class="indicator-divider">&rarr;</div>
+        <div class="indicator-step active">
+          <span class="step-num">2</span>
+          <span class="step-label">Page 2: Calculation Breakdown & Result</span>
+        </div>
+      </nav>
+
+      <div class="top-nav-buttons">
+        <button id="btn-back" class="btn btn-secondary" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span>Back to Input</span>
+        </button>
+        <button id="btn-reset-top" class="btn btn-outline" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"/>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+          </svg>
+          <span>Reset / New</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Results Content Container -->
+    <main id="results-content" class="results-container">
+      
+      <!-- A. Operation Summary Card -->
+      <section class="card summary-card">
+        <div class="card-header">
+          <h2>
+            <span class="header-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            </span>
+            Operation Summary
+          </h2>
+          <span id="summary-operation-badge" class="badge">Operation</span>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-item">
+            <span class="summary-label">Original Input Text:</span>
+            <code id="summary-original-text" class="summary-code">--</code>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Cleaned Alphabet Text:</span>
+            <code id="summary-cleaned-text" class="summary-code">--</code>
+          </div>
+          <div class="summary-item summary-matrix-item">
+            <span class="summary-label">User-Provided 2×2 Key Matrix K:</span>
+            <div id="summary-matrix-display" class="summary-matrix"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- B. Step 1: Text Preparation -->
+      <section class="card step-section">
+        <div class="card-header">
+          <h2>
+            <span class="step-badge">Step 1</span>
+            Text Preparation & Digraph Grouping
+          </h2>
+        </div>
+        <div id="step1-container">
+          <!-- Populated by results.js -->
+        </div>
+      </section>
+
+      <!-- C. Step 2: Key Matrix Analysis -->
+      <section class="card step-section">
+        <div class="card-header">
+          <h2>
+            <span class="step-badge">Step 2</span>
+            Key Matrix Analysis & Inversion Verification
+          </h2>
+        </div>
+        <div id="step2-container">
+          <!-- Populated by results.js -->
+        </div>
+      </section>
+
+      <!-- D. Step 3: Detailed Mathematical Calculations -->
+      <section class="card step-section">
+        <div class="card-header">
+          <h2>
+            <span class="step-badge">Step 3</span>
+            Detailed Mathematical Calculations (Every Pair)
+          </h2>
+        </div>
+        <div id="step3-container">
+          <!-- Populated by results.js -->
+        </div>
+      </section>
+
+      <!-- E. Final Result Card -->
+      <section class="card final-result-card">
+        <div class="result-header">
+          <div class="result-badge-label">
+            <span class="dot green"></span>
+            <span id="result-title">Final Ciphertext Output:</span>
+          </div>
+          <button id="btn-copy-result" class="btn btn-copy-result" type="button" title="Copy result to clipboard">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span>Copy Result</span>
+          </button>
+        </div>
+        <div class="result-value-display">
+          <div id="final-result-text" class="final-result-string">--</div>
+        </div>
+      </section>
+
+      <!-- Bottom Navigation Buttons -->
+      <div class="card action-card">
+        <div class="action-card-inner">
+          <div class="action-description">
+            <strong>Next Steps:</strong> You can navigate back to modify the input text or key matrix, or start a new calculation.
+          </div>
+          <div class="action-buttons-group">
+            <button id="btn-reset-bottom" class="btn btn-outline" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="1 4 1 10 7 10"/>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+              </svg>
+              <span>Reset &amp; Start New</span>
+            </button>
+            <button id="btn-back-bottom" class="btn btn-primary" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              <span>Back to Input (Modify Text / Matrix)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>CNS Mini Project &mdash; <strong>Secure Text Encryption & Decryption using 2×2 Hill Cipher</strong></p>
+      <p class="footer-meta">Designed for College Viva Demonstration &bull; Modulo 26 Matrix Arithmetic</p>
+    </footer>
+  </div>
+
+  <script type="module" src="./src/js/results.js"></script>
+</body>
+</html>
